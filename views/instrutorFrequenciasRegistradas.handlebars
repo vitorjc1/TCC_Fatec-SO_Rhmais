@@ -1,0 +1,50 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+      <div class="card-header text-white" style="background-color: #836FFF;">
+              <h3 class="text-center">Chamadas anteriores</h3>
+        </div>
+   
+    {{#each chamadas}}
+    <div class="card mt-4">
+
+       <div class="card-header text-white" style="background-color: #836FFF;">
+              <h3 class="text-center"></h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <div class="row text-center">
+                <div class="col-md-4">
+                     <h5><b> Data:</b> {{formatDate dataFrequencia}}</h5> 
+                    
+                </div>
+                 <div class="col-md-4">
+                  <h5><b>Aulas ministradas: </b> {{horaAula}}</h5>
+                </div>  
+                <div class="col-md-4">
+                    <h5> <a href="/alterarFrequencia/{{frequenciaId}}/{{agendaCursoId}}" class="btn btn-primary" style="padding-left: 50px; padding-right:50px;">Alterar</a></h5>
+                </div>              
+            </div>        
+           
+        </div>
+    </div>
+    {{else}}
+    <div class="card text-center">
+        <div class="card-header" style="background-color: #836FFF;">
+            <h3>Não há nenhuma frequência registrada</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="mt-4 alert alert-primary" >Não perca tempo e registre a presença de seus alunos!</h5>
+        </div>
+    </div>
+    {{/each}}
+    <br/>
+    <div>
+        <a href="/adicionarFrequencia/{{id}}" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+    <br/>
+</div>

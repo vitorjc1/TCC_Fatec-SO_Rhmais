@@ -1,0 +1,51 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+
+    <div class="container">
+       
+            <h3 class="text-center">Todas as Requisições <i class="fa fa-address-card"
+                            aria-hidden="true"></i></h3>
+
+        <div class="col mt-4" align="center">
+            <a href="/visualizar/requisicaoAprovada" class="btn btn-outline-primary">Visualizar Requisições Aprovadas</a>
+        </div>
+
+
+        {{#each requisicoes}}
+        <div class="card mt-5">
+
+            <div class="card-header colorViolet text-white">
+                <h5>Curso: {{dataValues.curso.dataValues.nome}}</h5>
+            </div>
+            <div class="card-body">
+                <div class="col">
+                    <p><b>Colaborador Requisitante:</b> {{dataValues.colaborador.dataValues.nome}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Data de requisição:</b> {{formatDate dataValues.dataRequisicao}} </p>
+                </div>
+                <a href="/requisicao/aprovar/{{dataValues.id}}" class="btn btn-primary">Aprovar</a>
+                <a href="/requisicao/negar/{{dataValues.id}}" class="btn btn-danger">Negar</a>
+            </div>
+        </div>
+        {{else}}
+        <div class="card mt-4 text-center">
+            <div class="card-header colorViolet text-white">
+                <h3>Nenhuma Requisicao encontrada.</h3>
+            </div>
+            <div class="card-Body">
+                <h6>No momento você não possui nenhuma requisição de curso dos seus colaboradores para aprovação </h6>
+            </div>
+        </div>
+        {{/each}}
+
+        <a href="/gerenciarAgenda" class="btn btn-primary mt-4 mb-4"
+            style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+
+</div>

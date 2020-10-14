@@ -1,0 +1,46 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+    <div class="container">
+        <h4 class="text-center">Buscar por nome ou matrícula</h4>
+    </div>
+    <form action="/buscarHistoricoAvaliacao" method="post" class="mb-3">
+        <div class="input-group">
+            <input class="form-control" type="text" name="matriculaId" placeholder="nome ou matrícula..." />
+            <div class="input-group-btn">
+                <button class="btn colorViolet text-white" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+    {{#each colaboradores}}
+    <div class="card mt-4">
+
+        <div class="card-header colorViolet text-white">
+            <h5>{{[2].nome}}</h5>
+        </div>
+        <div class="card-body">
+            <b>{{[0].cargo}}</b>
+            <div class="row mt-2">
+                <div class="col-md-3">
+                    <p><b>Matrícula: </b>{{[4].matricula}} </p>
+                </div>
+                <div class="col-md-3">
+                    <p><b>Setor: </b>{{[1].setor}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>Última Avaliação: </b>{{formatDate [3].data }}</p>
+                </div>
+
+            </div>
+            <a href="/historicoAvaliacoes/{{[5].id}}" class="btn btn-primary">Ver Avaliações</a>
+        </div>
+    </div>
+
+    {{/each}}
+    <a href="/gerenciarAvaliacao" class="btn btn-primary mt-4 mb-4"
+        style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+</div>

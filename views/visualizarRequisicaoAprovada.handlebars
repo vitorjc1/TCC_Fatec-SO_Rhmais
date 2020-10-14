@@ -1,0 +1,49 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+
+    <div class="container">
+        
+            <h3 class="text-center">Todas as Requisições Aprovadas <i class="fa fa-address-card"
+                            aria-hidden="true"></i></h3>
+
+        <div class="col mt-3" align="center">
+            <a href="/cadastrarAgenda" class="btn btn-outline-primary">Criar uma nova Agenda</a>
+        </div>
+
+        {{#each requisicoes}}
+        <div class="card mt-3">
+
+            <div class="card-header colorViolet text-white" style="background-color: #836FFF">
+                <h5>Curso: {{dataValues.curso.dataValues.nome}}</h5>
+            </div>
+            <div class="card-body">
+                <div class="col">
+                    <p><b>Colaborador Requisitante:</b> {{dataValues.colaborador.dataValues.nome}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Data de requisição:</b> {{formatDate dataValues.dataRequisicao}} </p>
+                    <p><b>Data da aprovação:</b> {{formatDate dataValues.dataAtualizacao}} </p>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="card mt-4 text-center">
+            <div class="card-header  text-white colorViolet">
+                <h3>Nenhuma Requisicao encontrada.</h3>
+            </div>
+            <div class="card-Body">
+                <h6>No momento você não possui nenhuma requisição aprovada </h6>
+            </div>
+        </div>
+        {{/each}}
+
+        <a href="/visualizarRequisicao" class="btn btn-primary mt-4 mb-4"
+            style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+
+</div>

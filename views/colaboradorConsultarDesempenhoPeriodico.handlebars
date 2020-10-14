@@ -1,0 +1,205 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    <h3 class="text-center">Confira as suas avaliações periódicas <i class="fa fa-line-chart" aria-hidden="true"></i></h3>
+    {{#if avaliacoes}}
+    
+    <div class="card mt-4 mb-4">
+        
+        <div class="card-body" >
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="text-center mt-4" style="color: #836FFF;"><b>Gráficos</b></h4>
+                </div>
+            </div>
+           <div class="row">
+               <div class="col-md-6">
+                   <canvas id="graficoAvaliacoes" height="350%"></canvas>
+               </div>
+               <div class="col-md-6">
+                   <canvas id="graficoAvaliacoess" height="350%"></canvas>
+               </div>
+           </div>
+            <hr>
+                   
+            <h4  style="color: #836FFF;" class="text-center mt-5"><b>Avaliações anteriores</b></h4>
+            <div class="card-body mt-2" style="overflow: auto; width: 100%; height: 330px; ">
+                
+                {{#each avaliacoes}}
+                <hr style="color:#836FFF; background-color: #836FFF;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6><b>Nota Geral: </b>{{nota}}</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><b>Avaliação em Equipe: </b>{{avaliacaoEmEquipe}}</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><b>Avaliação comportamental: </b>{{avaliacaoComportamental}}</h6>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                     <div class="col-md-4">
+                        <h6><b>Auto Avaliação: </b>{{autoAvaliacao}}</h6>
+                    </div>
+                     <div class="col-md-4">
+                        <h6><b>Avaliação Técnica </b>{{avaliacaoTecnica}}</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><b>Data: </b>{{formatDate dataAvaliacao}}</h6>
+                    </div>
+                </div>
+          
+                <div class="row">
+                    <div class="col-md-12 mt-2">
+                        {{#if observacao}}
+                        <h6><b>Observação: </b>{{observacao}}</h6>
+                        {{else}}
+                        <h6><b>Observação: </b>Não há observações.</h6>
+                        {{/if}}
+                    </div>
+                </div>
+
+                {{/each}}
+            </div>
+            
+        </div>
+    </div>
+    
+    {{else}}
+        <div class="card text-center mt-5">
+
+            <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+                <div><h5>Não há avaliações periódicas.</h5></div>
+            </div>
+
+            <div class="card-body">
+                <div class="alert alert-primary ">
+                    <h6>No momento você não possui nenhuma avaliação periódica.</h6>
+                    <h6>Mas não fique  desanimado, logo seu gestor fará sua primeira avaliação! </h6>
+                </div>
+            </div>
+
+        </div>
+    {{/if}}
+    
+
+    <div class="mt-4">
+        <a href="/consultarDesempenho" class="btn btn-primary" style="padding-left:60px; padding-right:60px">Voltar</a>
+    </div>
+    <br/>
+</div>
+
+
+     
+<script>
+    var ctx = document.getElementById('graficoAvaliacoes').getContext('2d');
+
+    var x = 'rgba(153, 102, 255, 0.2)';
+    var dados = [{{medias.[0].nota}}, {{medias.[0].avaliacaoComportamental}}, {{medias.[0].avaliacaoEmEquipe}},{{medias.[0].avaliacaoTecnica}}, {{medias.[0].autoAvaliacao}}];
+    var colors = ['rgb(131, 111, 255)','rgb(131, 111, 255)','rgb(131, 111, 255)','rgb(131, 111, 255)','rgb(131, 111, 255)'];
+    for(i = 0; i < dados.length; i++){
+
+        if(dados[i] < 5){
+            colors[i] = '#f2525f';
+        }
+    }
+
+    var chart = new Chart(ctx, {
+        type: 'bar',
+  data: {
+    labels: ['Geral','Comportamental','Em equipe','Técnica','Auto Avaliação'],
+    datasets: [{ 
+        data: [{{medias.[0].nota}}, {{medias.[0].avaliacaoComportamental}},  {{medias.[0].avaliacaoEmEquipe}},{{medias.[0].avaliacaoTecnica}}, {{medias.[0].autoAvaliacao}}],
+        label: "Média Geral",
+         backgroundColor: colors
+      }]
+  },
+     options: {
+            scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                max: 10,
+                min: 0
+            }
+        }]
+    },
+
+            labels: {
+                fontStyle: "bold",
+                        fontColor: 'black',
+                        position : 'outside'
+            },
+        
+    
+    }
+});
+
+ var ctx2 = document.getElementById('graficoAvaliacoess').getContext('2d');
+ var c = {{avaliacoesAnteriores.length}}
+ if(c < 4){
+
+var chart2 = new Chart(ctx2, {
+  type: 'line',
+  data: {
+    labels: ['{{formatDateAnoMes avaliacoesAnteriores.[0].dataAvaliacao}}','{{formatDateAnoMes avaliacoesAnteriores.[1].dataAvaliacao}}','{{formatDateAnoMes avaliacoesAnteriores.[2].dataAvaliacao}}','{{formatDateAnoMes avaliacoesAnteriores.[3].dataAvaliacao}}'],
+    datasets: [{ 
+        data: [{{avaliacoesAnteriores.[0].nota}},{{avaliacoesAnteriores.[1].nota}},{{avaliacoesAnteriores.[2].nota}},{{avaliacoesAnteriores.[3].nota}}],
+        label: "Notas de avaliações anteriores",
+        borderColor: "#3e95cd",
+        fill: false
+      },
+    ]
+  },
+  options: {
+         scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                max: 10,
+                min: 0
+            }
+        }]
+    },
+
+  }
+});
+ }else{
+     c = c -4;
+
+     var chart2 = new Chart(ctx2, {
+  type: 'line',
+  data: {
+    labels: ['{{formatDateAnoMes avaliacoesAnteriores.[c].dataAvaliacao}}','{{formatDateAnoMes avaliacoesAnteriores.[c+1].dataAvaliacao}}','{{formatDateAnoMes avaliacoesAnteriores.[c+2].dataAvaliacao}}','{{formatDateAnoMes avaliacoesAnteriores.[c+3].dataAvaliacao}}'],
+    datasets: [{ 
+        data: [{{avaliacoesAnteriores.[c].nota}},{{avaliacoesAnteriores.[c+1].nota}},{{avaliacoesAnteriores.[c+2].nota}},{{avaliacoesAnteriores.[c+3].nota}}],
+        label: "Notas de avaliações anteriores",
+        borderColor: "#3e95cd",
+        fill: false
+      },
+    ]
+  },
+  options: {
+         scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                max: 10,
+                min: 0
+            }
+        }]
+    },
+
+  }
+});  
+
+ }
+  
+
+            
+     <{{!}}/script>

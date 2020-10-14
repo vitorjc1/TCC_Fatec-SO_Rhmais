@@ -1,0 +1,158 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    <h3 class="text-center">Confira as suas avaliações de cursos realizados <i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
+    {{#if cursos }}
+    <div class="card mt-5 mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <canvas id="graficoAvaliacoess"  height="110%"></canvas>
+                </div>
+            </div>
+            <h4 style="color: #836FFF;" class="text-center mt-5"><b>Avaliações</b></h4>
+            <div class="card-body mt-2" style="overflow: auto; width: 100%; height: 330px; ">
+
+                {{#each cursos}}
+                <hr style="color:#836FFF; background-color: #836FFF;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5><b>{{nome}}</b></h5>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-3">
+                        <h6><b>Nota: </b>{{nota}}</h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h6><b>Frequência: </b>{{frequencia}}%</h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h6><b>Data da avaliação: </b>{{formatDate dataAvaliacao}}</h6>
+                    </div>
+                      <div class="col-md-3">
+                          {{#ifCond situacao '==' 1}}
+                        <h6 class="text-primary"><b class="text-dark">Situação: </b>Aprovado</h6>
+                        {{else}}
+                        <h6 class="text-danger"><b class="text-dark">Situação: </b>Reprovado</h6>
+                        {{/ifCond}}
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-4">
+                        {{#if observacao}}
+                        <h6><b>Observação: </b>{{observacao}}</h6>
+                        {{else}}
+                        <h6><b>Observação: </b>Não há observações.</h6>
+                        {{/if}}
+                    </div>
+
+                </div>
+
+                {{/each}}
+            </div>
+
+        </div>
+    </div>
+    
+    {{else}}
+    <div class="card mt-5">
+        <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+            <h3 class="text-center" >Não há avaliações de cursos</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="col-md-12 alert alert-primary">
+                <h6>No momento você não possui nenhum curso finalizado</h6>
+                <h6>Não perca tempo faça uma  nova requisição de curso ao seu gestor!</h6>
+            </div>
+            <div class='col'>
+                <a href="/requisitarCurso" class="btn btn-primary">Requisitar Curso</a> 
+            </div>
+            
+        </div>
+
+    </div>
+
+
+    {{/if}}
+    <div class="mt-4">
+        <a href="/consultarDesempenho" class="btn btn-primary" style="padding-left:60px; padding-right:60px">Voltar</a>
+    </div>
+    <br />
+
+</div>
+
+<script>
+ 
+
+ var ctx2 = document.getElementById('graficoAvaliacoess').getContext('2d');
+console.log({{c}});
+
+
+
+ if({{c}} < 4){
+ var chart2 = new Chart(ctx2, {
+  type: 'line',
+  data: {
+    labels: ['{{formatDateDiaMes cursos2.[0].dataAvaliacao}}','{{formatDateDiaMes cursos2.[1].dataAvaliacao}}','{{formatDateDiaMes cursos2.[2].dataAvaliacao}}','{{formatDateDiaMes cursos2.[3].dataAvaliacao}}'],
+    datasets: [{ 
+        data: [{{cursos2.[0].nota}},{{cursos2.[1].nota}} ,{{cursos2.[2].nota}},{{cursos2.[3].nota}}],
+        label: "4 últimas avaliações",
+        borderColor: "#3e95cd",
+        fill: false
+      },
+    ]
+  },
+  options: {
+         scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                max: 10,
+                min: 0
+            }
+        }]
+    },
+
+  }
+});
+ }//fim if
+ else{
+     let c  = {{c}}-4;
+
+    var chart2 = new Chart(ctx2, {
+  type: 'line',
+  data: {
+    labels: ['{{formatDateDiaMes cursos2.[c].dataAvaliacao}}','{{formatDateDiaMes cursos2.[c+1].dataAvaliacao}}','{{formatDateDiaMes cursos2.[c+2].dataAvaliacao}}','{{formatDateDiaMes cursos2.[c+3].dataAvaliacao}}'],
+    datasets: [{ 
+        data: [{{cursos2.[c].nota}},{{cursos2.[c+1].nota}} ,{{cursos2.[c+2].nota}},{{cursos2.[c+3].nota}}],
+        label: "4 últimas avaliações",
+        borderColor: "#3e95cd",
+        fill: false
+      },
+    ]
+  },
+  options: {
+         scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                max: 10,
+                min: 0
+            }
+        }]
+    },
+
+  }
+});
+
+ }
+
+
+            
+     <{{!}}/script>

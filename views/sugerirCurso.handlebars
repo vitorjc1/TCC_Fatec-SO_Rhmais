@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    <div class="card mt-4">
+        <div class="card-header colorViolet text-white">
+            <h4 class="text-center">Sugestão de Curso</h4>
+        </div>
+        <div class="card-body" >
+            <form action="/cadastrarSugestao" method="POST">
+                <div class="form-group">
+                    <label for="formGroupExampleInput"><b>Nome do curso</b></label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" name="nomeCurso"
+                        placeholder="Nome do curso..." maxlength="100" required>
+                </div>
+                <input type="hidden" name="colaboradorId" value="{{user.dataValues.id}}">
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="exampleInputDescricao"><b>Motivo pelo qual você deseja esse curso</b> </label>
+                        <textarea type="text" class="form-control" id="exampleInputDescricao"
+                            aria-describedby="descricaoHelp" name="motivo" rows="5" minlength="20" maxlength="250" required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-4">Sugerir</button>
+            </form>
+        </div>
+    </div>
+
+
+<div class="mt-4">
+    <a class="btn btn-primary" href="/listagemSugestao" style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+</div>
+</div>
+
+
+
+<br/>
+<br/>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<br/>
+<br/>
+<br/>
+

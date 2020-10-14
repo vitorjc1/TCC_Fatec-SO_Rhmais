@@ -1,0 +1,46 @@
+<div class="container mt-4">
+    {{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+    {{else}}
+    {{/each}}
+
+    <div class="card mt-5">
+        <div class="card-header colorViolet text-white" style="background-color:#836FFF">
+            <h4 class="text-center">Cadastrar novo Curso</h4>
+        </div>
+
+        <div class="card-body" style="background-color: white;">
+            <form action="/curso/cadastrar" method="post">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Nome: </label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" name="nome" minlength="5" maxlength="50" required>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="exampleInputCargaHorario">Carga Horária: </label>
+                        <input type="number" class="form-control" id="exampleCargaHoraria"
+                            placeholder="Carga Horária..." name="cargaHoraria" min="1" max="1000" required>
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputValor">Valor: </label>
+                        <input type="number" placeholder="1.00" step="0.01" min="1" name="valor"  class="form-control" required>
+
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="exampleInputDescricao">Descrição: </label>
+                        <textarea type="text" class="form-control" id="exampleInputDescricao"
+                            aria-describedby="descricaoHelp" name="descricao" rows="10" minlength="10" maxlength="250" required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-4">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+    <a href="/gerenciarCurso" class="btn btn-primary mt-4 mb-4"
+        style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+
+</div>

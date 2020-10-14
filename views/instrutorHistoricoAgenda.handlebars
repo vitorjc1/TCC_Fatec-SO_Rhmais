@@ -1,0 +1,59 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+
+    <div class="container">
+        <div class="card-header colorViolet text-white text-center">
+            <h3>Histórico de agendas</h3>
+        </div>
+
+        {{#each agendas}}
+        <div class="card mt-5">
+
+            <div class="card-header colorViolet text-white">
+                <h5>Curso: {{dataValues.curso.dataValues.nome}}</h5>
+            </div>
+            <div class="card-body">
+                <div class="col">
+                    <p><b>Instrutor responsável:</b>
+                        {{dataValues.instrutor.dataValues.colaborador.dataValues.nome}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Data de Início:</b> {{formatDateHorario dataValues.dataInicio}} </p>
+                </div>
+                <div class="col">
+                    <p><b>Data de Conclusão:</b> {{formatDateHorario dataValues.dataFinal}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Local:</b> {{dataValues.local}}</p>
+                </div>
+                <div class="container">
+                     <a href="/historico/agenda/{{dataValues.id}}" class="btn btn-primary">Ver mais</a>
+                </div>
+               
+            </div>
+        </div>
+        {{else}}
+        <div class="card mt-4 text-center">
+            <div class="card-header colorViolet text-white">
+                <h5>Nenhuma agenda encontrada.</h5>
+            </div>
+            <div class="card-Body">
+                <h6 class="mt-4 alert alert-primary">No momento você não possui nenhum curso avaliado.</h6>
+            </div>
+        </div>
+        {{/each}}
+
+        <div>
+            <a href="/homeInstrutor" class="btn btn-primary mt-5" style="padding-left: 50px; padding-right: 50px;">Voltar </a>
+        </div>
+        <br/>
+
+
+    </div>
+
+</div>

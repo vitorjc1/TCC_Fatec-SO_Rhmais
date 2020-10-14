@@ -1,0 +1,65 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+
+    <div class="container">
+       
+            <h3 class="text-center">Histórico de agendas <i class="fa fa-history" aria-hidden="true"></i></h3>
+        
+        {{#if agendas}}
+            <div class="container mt-5">
+            </div>
+            <form action="/buscarHistoricoAgenda" method="post" class="mb-3">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="busca" placeholder="nome do curso..." />
+                <div class="input-group-btn">
+                    <button class="btn colorViolet text-white" type="submit">Buscar</button>
+                </div>
+                </div>
+        </form>
+        {{/if}}
+        {{#each agendas}}
+        <div class="card mt-5">
+
+            <div class="card-header colorViolet text-white">
+                <h5>Curso: {{dataValues.curso.dataValues.nome}}</h5>
+            </div>
+            <div class="card-body">
+                <div class="col">
+                    <p><b>Instrutor responsável:</b> {{dataValues.instrutor.dataValues.colaborador.dataValues.nome}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Data de Início:</b> {{formatDateHorario dataValues.dataInicio}} </p>
+                </div>
+                <div class="col">
+                    <p><b>Data de Conclusão:</b> {{formatDateHorario dataValues.dataFinal}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Local:</b> {{dataValues.local}}</p>
+                </div>
+                <div class="col">
+                    <a href="/historicoAgenda/detalhe/{{dataValues.id}}" class="btn btn-primary">Ver mais</a>
+                </div>
+
+            </div>
+        </div>
+        {{else}}
+        <div class="card mt-4 text-center">
+            <div class="card-header colorViolet text-white">
+                <h5>Nenhuma agenda encontrada.</h5>
+            </div>
+            <div class="card-Body">
+                <p>No momento você não agendou nenhum curso para você ou para os seus colaboradores</p>
+            </div>
+        </div>
+        {{/each}}
+
+        <a href="/gerenciarAgenda" class="btn btn-primary mt-4 mb-4"
+            style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+
+</div>

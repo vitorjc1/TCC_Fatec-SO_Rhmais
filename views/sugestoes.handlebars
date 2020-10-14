@@ -1,0 +1,45 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+
+    <div class="text-center mt-4">
+        <h3>Sugestões de cursos <i class="fa fa-commenting" aria-hidden="true"></i></h3>
+    </div>
+
+    {{#each sugestoes}}
+    <div class="card mt-5">
+
+        <div class="card-header colorViolet text-white">
+            {{dataValues.colaborador.dataValues.nome}}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{dataValues.nomeCurso}}</h5>
+
+            <p>Motivo: {{dataValues.motivo}}</p>
+            <p><b>Data da sugestão: </b>{{formatDate dataValues.data}}</p>
+
+            <a href="/aprovarSugestao/{{dataValues.id}}" class="btn btn-primary">Cadastrar curso</a>
+            <a href="/negarSugestao/{{dataValues.id}}" class="btn btn-danger text-white">Reprovar</a>
+        </div>
+    </div>
+    
+    {{else}}
+     <br/>
+    <div class="card text-center">
+        <div class="card-header text-white" style="background-color: #836FFF;"><h5>Não há sugestões</h5></div>
+        <div class="card-body ">
+            <h6 class="mt-4 alert alert-primary" >No momento você não possui nenhuma sugestão para novos cursos!</h6>
+        </div>
+
+    </div>
+    {{/each}}
+    <br/>
+    <br/>
+    <a href="/gerenciarCurso" class="btn btn-primary mt-4 mb-4"
+        style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    <br/>
+</div>

@@ -1,0 +1,67 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    <div class="card mt-4">
+        <div class="card-header colorViolet text-white">
+            <h3 class="text-center">Requisição de Curso</h3>
+        </div>
+        <div class="card-body" >
+            <form action="/cadastrarRequisicao" method="POST">
+                <div class="form-group">
+                    
+                    <div class="col">
+                        <label for="formGroupExampleInputCurso"><h5>Nome do curso: </h5></label>
+                        <select class="form-control" name="cursoId">
+                            {{#each cursos}}
+                            <option value="{{dataValues.id}}">{{dataValues.nome}}</option>
+                            {{else}}
+
+                            {{/each}}
+                        </select>
+                        <button type="submit" class="btn btn-primary mt-4">Requisitar</button>
+                    </div>
+                </div>
+                <input type="hidden" name="colaboradorId" value="{{user.dataValues.id}}">
+
+            </form>
+        </div>
+
+    </div>
+
+    <div>
+        <a href="/listagemRequisicaoCurso" class="btn btn-primary mt-4" style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+
+</div>
+
+
+<br/>
+<br/>
+<br/>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<br/>
+<br/>
+<br/>
+
+
+
+<br/>
+<br/>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+

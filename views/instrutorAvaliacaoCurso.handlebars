@@ -1,0 +1,93 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+    {{#ifCond flag '==' 0}}
+    <div class="alert alert-warning ">
+        <p class="text-center">Atenção: Você não pode avaliar os alunos pois o curso ainda não finalizou!</p>
+    </div>
+    {{else}}
+    {{/ifCond}}
+    <div class="card mt-4">
+        <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+            <h3 class="text-center">Participantes da Agenda</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Curso:</b> {{agenda.dataValues.curso.dataValues.nome}}</h5>
+
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Local:</b> {{agenda.dataValues.local}}</h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data de início:</b>
+                        {{formatDate agenda.dataValues.dataInicio}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data final:</b> {{formatDate agenda.dataValues.dataFinal}}
+                    </h5>
+                </div>
+            </div>
+            
+        </div>
+        <h4 style="color: #836FFF;" class="text-center"><b>Avaliação de Alunos</b></h4>
+        <div class="mt-4">
+            <form action="/avaliarCurso/avaliarParticipante" method="POST">
+                <div class="card-body " style="overflow: auto; width: 100%; height: 450px; ">
+                    
+                    <input type="hidden" name="idAgenda" id="idAgenda" value="{{agenda.dataValues.id}}">
+                    <input type="hidden" name="curso" value="{{agenda.dataValues.curso.dataValues.nome}}">
+                    {{#each frequencias}}
+                    <hr style="color:#836FFF; background-color: #836FFF;">
+                    <div class="row">
+                        <div class="col ">
+                            <input type="hidden" name="idAgendaCursoColaborador" value="{{id}}">
+                            <h5><b>{{nome}}</b></h5>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col ">
+                            <h6>Nota:</h6> <input type="number" name="nota" step="0.01" class="form-control md-3"
+                                min="0" max="10">
+                        </div>
+                        <div class="col">
+                            Observação: <input type="text" name="observacao" class="form-control" maxlength="100">
+                        </div>
+                        <div class="col text-center mt-2">
+                            <b>Presença</b>
+                            <p><b>{{porcentagem}}%</b></p>
+                        </div>
+                    </div>
+                    <div class="col mt-3"></div>
+
+                    {{/each}}
+
+                </div>
+                <br/>
+                <div class="container">
+                    {{#ifCond flag '==' 0}}
+                    <a class="btn btn-primary" href="/avaliarCurso"> Voltar ao Menu </a>
+                    {{else}}
+                    <button type="submit" class="btn btn-primary text-center "
+                        style="padding-left: 60px; padding-right:60px;">Confirmar</button>
+                    {{/ifCond}}
+                </div>
+                <br/>
+
+            </form>
+
+
+        </div>
+    </div>
+    <br/>
+    <div >
+        <a href="/avaliarCurso" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+    <br/>
+</div>

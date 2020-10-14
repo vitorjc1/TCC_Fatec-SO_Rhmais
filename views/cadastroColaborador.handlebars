@@ -1,0 +1,127 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    <div class="card mt-4">
+        <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+            <h3 class="text-center">Cadastrar Colaborador</h3>
+        </div>
+
+        <div class="card-body">
+            <form action="/colaborador/cadastro" method="POST">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Nome</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" name="nome"
+                        placeholder="Nome do colaborador..." minlength="10" maxlength="50" value="{{nome}}" required >
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="exampleInputMatricula">Matrícula</label>
+                        <input type="number" class="form-control" id="exampleInputMatricula" name="matricula"
+                            placeholder="Matrícula..."  min="100000" max="999999999"  value="{{matricula}}" required>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="exampleInputEmail1">E-mail</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            name="email" placeholder="E-mail..." minlength="10"  maxlength="60" value="{{email}}" required> 
+                    </div>
+                    <div class="col">
+                        <label>Setor</label>
+                        <select class="form-control" name="setorId">
+                            {{#each setores}}
+                            <option value="{{dataValues.id}}" {{selecionar dataValues.id ../user.dataValues.setorId}}>{{dataValues.nome}}</option>
+                            {{else}}
+                            <option value="0">Nenhum setor cadastrado</option>
+                            {{/each}}
+                        </select>
+
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="cargo">Cargo</label>
+                        <select class="form-control" name="cargoId">
+                            {{#each cargos}}
+                            <option value="{{dataValues.id}}" {{selecionar dataValues.id ../cargoId}}>{{dataValues.nome}}</option>
+                            {{else}}
+
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Nível de acesso</label>
+                        <select class="form-control" name="acesso">
+                            {{#if acesso}}
+                            {{#ifCond acesso '==' 0}}
+                            <option value="0" selected> Colaborador </option>
+                            <option value="1" > Gestor </option>
+                            <option value="2" > Instrutor </option>
+                            {{/ifCond}}
+                            {{#ifCond acesso '==' 1}}
+                            <option value="0" > Colaborador </option>
+                            <option value="1" selected> Gestor </option>
+                            <option value="2" > Instrutor </option>
+                            {{/ifCond}}
+                            {{#ifCond acesso '==' 2}}
+                            <option value="0" > Colaborador </option>
+                            <option value="1" > Gestor </option>
+                            <option value="2" selected> Instrutor </option>
+                            {{/ifCond}}
+                            {{else}}
+                            <option value="0" > Colaborador </option>
+                            <option value="1" > Gestor </option>
+                            <option value="2" > Instrutor </option>
+                            {{/if}}
+
+                        </select>
+
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <label for="exampleInputPassword1">Senha</label>
+                        <input type="password" class="form-control" id="senha" placeholder="Senha..."
+                           minlength="6" maxlength="20" name="senha" value="{{senha}}" required>
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPassword1">Confirmar Senha</label>
+                        
+                        <input type="password" class="form-control" id="confirmaSenha" placeholder="Confirme a Senha..."
+                            minlength="6" maxlength="20" name="confirmarSenha" value="{{confirmarSenha}}" oninput="Verifica()" required>
+                            <label id="senhaErro"   style="color: #fff">As senhas não conferem!</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div>
+        <a href="/gerenciarColaborador" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+</div>
+
+<script>
+
+function Verifica(){
+    val1=document.getElementById("senha").value;
+    val2=document.getElementById("confirmaSenha").value;
+    if(val1!=val2){
+    document.getElementById("senha").style.borderColor="#f00";
+        document.getElementById("confirmaSenha").style.borderColor="#f00";
+        document.getElementById("senhaErro").style.color="#f00";
+    }
+    else{document.getElementById("senha").style.borderColor="#000";
+        document.getElementById("confirmaSenha").style.borderColor="#000";
+        document.getElementById("senhaErro").style.color="#fff";
+
+        }
+    }
+
+<{{!}}/script>

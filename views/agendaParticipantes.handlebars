@@ -1,0 +1,104 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+    {{#ifCond flag '==' 1}}
+    <div class="alert alert-warning text-center">Não será possível remover ou adicionar participantes pois a agenda já
+        foi iniciada!</div>
+    {{else}}
+    {{/ifCond}}
+    <div class="card mt-4">
+        <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+            <h3 class="text-center">Participantes da Agenda</h3>
+        </div>
+        <div class="card-body" >
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Curso:</b> {{agenda.dataValues.curso.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Local:</b> {{agenda.dataValues.local}}</h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Instrutor:</b>
+                        {{agenda.dataValues.instrutor.dataValues.colaborador.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Gestor:</b> {{agenda.dataValues.gestor.dataValues.colaborador.dataValues.nome}}
+                    </h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data de início:</b>
+                        {{formatDateHorario agenda.dataValues.dataInicio}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data final:</b> {{formatDateHorario agenda.dataValues.dataFinal}}
+                    </h5>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <form action="/agenda/adicionarParticipantes" method="POST">
+                        <input type="hidden" value="{{id}}" name="agendaCursoId">
+                        <h5 class=" mb-3">Colaboradores não Agendados: </h5>
+                        <div class="form-group text-center">
+                            <select class="selectpicker form-control" multiple data-selected-text-format="count"
+                                data-size="30" data-live-search="true" name="participantes">
+                                {{#each colaboradores}}
+                                <option value={{colaboradorId}}>
+                                    {{nome}}
+                                </option>
+                                {{else}}
+
+                                {{/each}}
+                            </select>
+                            {{#ifCond flag '==' 1}}
+                            <button type="submit" class="btn btn-primary mt-4 text-center" disabled>Adicionar
+                                colaborador</button>
+                            {{else}}
+                            <button type="submit" class="btn btn-primary mt-4 text-center">Adicionar
+                                colaborador</button>
+                            {{/ifCond}}
+                        </div>
+                        <input type="hidden" name="id" value="{{user.dataValues.id}}">
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form action="/agenda/excluirParticipantes" method="POST">
+                        <input type="hidden" value="{{id}}" name="agendaCursoId2">
+                        <h5 class=" mb-3">Colaboradores Agendados: </h5>
+                        <div class="form-group text-center">
+                            <select class="selectpicker form-control" multiple data-selected-text-format="count"
+                               data-live-search="true" name="exparticipantes">
+                                {{#each participantes}}
+                                <option value="{{dataValues.colaborador.dataValues.id}}">
+                                    {{dataValues.colaborador.dataValues.nome}}
+                                </option>
+                                {{else}}
+                                {{/each}}
+                            </select>
+                            {{#ifCond flag '==' 1}}
+                            <button type="submit" class="btn btn-danger mt-4" disabled>Remover colaborador</button>
+                            {{else}}
+                            <button type="submit" class="btn btn-danger mt-4">Remover colaborador</button>
+                            {{/ifCond}}
+                        </div>
+
+                        <input type="hidden" name="id2" value="{{user.dataValues.id}}">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <a href="/visualizarAgenda" class="btn btn-primary mt-4 mb-4"
+        style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+</div>
+</div>

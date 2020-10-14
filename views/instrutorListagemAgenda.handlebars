@@ -1,0 +1,71 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+
+    {{#each agendas}}
+    <div class="card mt-5">
+
+        <div class="card-header colorViolet text-white">
+            <h5 class="text-center">{{curso}}</h5>
+        </div>
+        <div class="card-body ">
+            <div class="row mt-2 text-center">
+                <div class="col-md-4">
+                    <p><b>Data de Início: </b>{{formatDate dataInicio}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p><b>Data de Conclusão: </b>{{formatDate dataFinal}} </p>
+                </div>
+                <div class="col-md-4">
+                    <p><b>Local:</b> {{local}}</p>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-12 text-center">
+                        <a href="/adicionarFrequencia/{{agendaCursoId}}" class="btn btn-primary mt-2" >Adicionar
+                            Frequência</a>
+                            {{#if situacao}}
+                        <a href="/avaliarCurso/{{agendaCursoId}}" class="btn btn-primary mt-2"
+                            style="padding-left: 40px; padding-right:40px;">Avaliar Curso</a>
+                            {{else}}
+                            <button  class="btn btn-primary mt-2"
+                            style="padding-left: 40px; padding-right:40px;" disabled>Avaliar Curso</button>
+                            {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {{else}}
+
+<div class="card mt-4 text-center">
+    <div class="card-header colorViolet text-white">
+        <h5>Nenhum Curso para avaliar.</h5>
+    </div>
+    <div class="card-Body">
+        <div class="col mt-3">
+            <h5 class="alert alert-primary">No momento você não não possui nenhum curso para avaliar.</h5>
+        </div>
+        
+    </div>
+</div>
+
+{{/each}}
+
+
+
+<div class="mt-5">
+    <a href="/homeInstrutor" class="btn btn-primary" style="padding-left: 50px ; padding-right: 50px;">Voltar</a>
+</div>
+<br/>
+</div>

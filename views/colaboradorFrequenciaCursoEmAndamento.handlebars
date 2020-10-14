@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    <div class="card mt-4 mb-4">
+        <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+            <h3 class="text-center">Confira os dados do seu curso</h3>
+        </div>
+        <div class="card-body" >
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Curso:</b> {{agenda.dataValues.curso.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Local:</b> {{agenda.dataValues.local}}</h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Instrutor:</b>
+                        {{agenda.dataValues.instrutor.dataValues.colaborador.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Gestor:</b> {{agenda.dataValues.gestor.dataValues.colaborador.dataValues.nome}}
+                    </h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data de início:</b>
+                        {{formatDateHorario agenda.dataValues.dataInicio}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data final:</b> {{formatDateHorario agenda.dataValues.dataFinal}}
+                    </h5>
+                </div>
+            </div>
+            <hr>
+
+            <h4  style="color: #836FFF;" class="text-center mt-3"><b>Frequência</b></h4>
+            <div class="card-body mt-3" style="overflow: auto; width: 100%; height: 330px; ">
+                
+
+                {{#each frequencias}}
+                <hr style="color:#836FFF; background-color: #836FFF;">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h6><b>Presença(s): </b>{{dataValues.presenca}}</h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6><b>Falta(s): </b>{{dataValues.falta}}</h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h6><b>Hora Aula: </b>{{dataValues.horaAula}}</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><b>Data Frequencia: </b>{{formatDate dataValues.dataFrequencia}}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mt-3">
+                        {{#if observacao}}
+                        <h6><b>Observação: </b>{{observacao}}</h6>
+                        {{else}}
+                        <h6><b>Observação: </b>Não há observações.</h6>
+                        {{/if}}
+                    </div>
+                </div>
+
+                {{/each}}
+            </div>
+
+        </div>
+    </div>
+    <div class="mt-4">
+        <a href="/visualizarCursoEmAndamento" class="btn btn-primary"
+            style="padding-left:60px; padding-right:60px">Voltar</a>
+    </div>
+
+</div>

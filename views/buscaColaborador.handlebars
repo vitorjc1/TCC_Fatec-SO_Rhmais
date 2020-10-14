@@ -1,0 +1,60 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+    <div class="container">
+        <h4 class="text-center">Buscar por nome ou matrícula</h4>
+    </div>
+    <form action="/buscarMatricula" method="post">
+        <div class="input-group">
+            <input class="form-control" type="text" name="matriculaId" placeholder="Nome ou matricula..." />
+            <div class="input-group-btn">
+                <button class="btn colorViolet text-white" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+    {{#each colaborador}}
+    <div class="card mt-4">
+
+        <div class="card-header colorViolet text-white">
+            <h5>{{dataValues.nome}}</h5>
+        </div>
+        <div class="card-body">
+            <b>Cargo: </b>{{dataValues.cargo.dataValues.nome}}
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <p><b>Matrícula: </b> {{dataValues.matricula}}</p>
+                </div>
+                <div class="col-md-2">
+                    <p><b>Setor: </b>{{dataValues.setor.dataValues.nome}}</p>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+
+            </div>
+
+
+            <a href="/colaborador/info/{{dataValues.id}}" class="btn btn-primary">Ver mais</a>
+            <a href="/colaborador/alterar/{{dataValues.id}}" class="btn btn-success">Alterar</a>
+            <a class="btn btn-danger" href="/colaboradorExclusao/{{dataValues.id}}">Deletar</a>
+        </div>
+
+       
+    </div>
+    
+
+    {{else}}
+    <div class="alert alert-danger mt-5">Não existe colaborador com essa matrícula no seu Setor.</div>
+    {{/each}}
+    <a href="/gerenciarColaborador" class="btn btn-primary mt-4"
+        style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    <br/>
+    <br/>
+
+
+    
+
+</div>

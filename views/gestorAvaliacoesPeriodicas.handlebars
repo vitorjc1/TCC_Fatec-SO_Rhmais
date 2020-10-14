@@ -1,0 +1,99 @@
+<div class="container mt-4">
+
+    <div class="card mt-5">
+
+        <div class="card-header" style="background-color: #836FFF;">
+            <h4 class="text-center text-white">{{colaborador.dataValues.nome}}</h4>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><b>Matrícula</b>: {{colaborador.dataValues.matricula}}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><b>Cargo:</b> {{colaborador.dataValues.cargo.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><b>Setor:</b> {{colaborador.dataValues.setor.dataValues.nome}}</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h5><b>E-mail</b>: {{colaborador.dataValues.email}}</h5>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <br />
+    <h3 class="text-center">Todas Avaliações Periódicas <i class="fa fa-bar-chart" aria-hidden="true"></i></h3>
+    <br />
+
+    {{#each avaliacoes}}
+
+    <div class="card mt-2">
+
+        <div class="card-header" style="background-color: #836FFF; opacity: 0.85;">
+            <div class="row">
+                <div class="col-md-8 text-white">
+                    <h5><b>Media das notas: </b> {{media}}</h5>
+                </div>
+                <div class="col-md-4 text-white">
+                    <h5 class='text-white'><b>Data: {{formatDate dataAvaliacao}}</b></h5>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <h5><b>Nota: </b>{{nota}}</h5>
+                </div>
+                <div class="col-md-4 ">
+                    <h5><b>Autoavaliação: </b>{{autoAvaliacao}}</h5>
+                </div>
+                <div class="col-md-4 ">
+                    <h5><b>Avaliação técnica: </b>{{avaliacaoTecnica}}</h5>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-8">
+                    <h5><b>Avaliação comportamental:</b> {{avaliacaoComportamental}}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><b>Avaliação em equipe:</b> {{avaliacaoEmEquipe}}</h5>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                {{#if observacao}}
+                <div class="col-md-12">
+                    <h5><b>Observação: </b> {{observacao}}</h5>
+                </div>
+                {{else}}
+                <div class="col-md-12">
+                    <h5><b>Observação: </b> Não há observações!</h5>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+    {{/each}}
+    <div class="container">
+        <div class="row mb-3 mt-3">
+            <div class="col-md-4"><a href="/historicoAvaliacoes/{{colaborador.dataValues.id}}" class="btn btn-primary"
+                    style="padding-left: 50px; padding-right: 50px;">Voltar</a></div>
+        </div>
+    </div>
+
+
+</div>

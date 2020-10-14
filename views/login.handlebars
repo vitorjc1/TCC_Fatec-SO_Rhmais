@@ -1,0 +1,38 @@
+<body class="login" style="background-color: #B0C4DE;">
+    <div class="container mt-3 pt-5">
+        <p class="text-center text-white" style="font-size: 60px;">Recursos Humanos <i class="fa fa-user-plus"
+                aria-hidden="true"></i></p>
+        <br />
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="card" style="background-color: #f7f7f7; border-radius: 10px; border: 1px solid #836FFF;"
+                    style="border-width: 5px; border-color: black; border-style: solid; ">
+                    <div class="card-header" style="background-color: #836FFF; border-radius: 10px;">
+                        <h4 class="text-center text-white">Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/colaborador/login" method="post">
+                            <label for="email">E-mail</label>
+                            <input placeholder="seuemail@contato.com" type="email" class="form-control" name="email">
+
+                            <label class="mt-3" for="senha">Senha</label>
+                            <input placeholder="*******" type="password" class="form-control" name="senha">
+                            <br />
+                            <div class="form-row text-center">
+                                <div class="col-12">
+                                    <button class="btn text-center text-white form-control"
+                                        style="background-color: #836FFF;" type="submit">Entrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</body>

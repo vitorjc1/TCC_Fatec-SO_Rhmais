@@ -1,0 +1,86 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    {{#ifCond flag '==' 0 }}
+    <div class="alert alert-warning text-center">
+        <p>Atenção: Essa agenda já foi inciada. Não será possível a alteração de Curso, instrutor e a Data de Início!
+        </p>
+    </div>
+    {{else}}
+
+    {{/ifCond}}
+
+    <div class="card mt-4">
+        <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+            <h3 class="text-center">Dados da Agenda</h3>
+        </div>
+
+        <div class="card-body" >
+            <form action="/agenda/atualizar" method="POST">
+                <input type="hidden" name="agendaId" value="{{agenda.dataValues.id}}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="formGroupExampleInputCurso">
+                            <h5>Curso: </h5>
+                        </label>
+                        <select class="form-control" name="cursoId">
+                            {{#each cursos}}
+                            <option value="{{dataValues.id}}" {{selecionar dataValues.id ../agenda.dataValues.cursoId}}>
+                                {{dataValues.nome}}
+                            </option>
+                            {{else}}
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="formGroupExampleInputInstrutor">
+                            <h5>Instrutor: </h5>
+                        </label>
+                        <select class="form-control" name="instrutorId">
+                            {{#each instrutores}}
+                            <option value="{{dataValues.id}}"
+                                {{selecionar dataValues.id ../agenda.dataValues.instrutorId}}>
+                                {{dataValues.colaborador.dataValues.nome}}</option>
+                            {{else}}
+
+                            {{/each}}
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5>Data de início: </h5>
+                        <input type="datetime-local" value="{{formatDateHora agenda.dataValues.dataInicio}}"
+                            name="dataInicio" min="2020-01-01T00:00" class="form-control">
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <h5>Data de conclusão: </h5>
+                        <input type="datetime-local" value="{{formatDateHora agenda.dataValues.dataFinal}}"
+                            name="dataFinal" min="2020-01-01T00:00" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5>Local: </h5>
+                    <input type="text" value="{{agenda.dataValues.local}}" name="local" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-4">Alterar Agenda</button>
+        </div>
+        <input type="hidden" name="id" value="{{user.dataValues.id}}">
+
+        </form>
+
+
+
+    </div>
+    <a href="/visualizarAgenda" class="btn btn-primary mt-4 mb-4"
+        style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+</div>
+</div>

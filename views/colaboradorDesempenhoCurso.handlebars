@@ -1,0 +1,111 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    <div class="card mt-4 mb-4">
+        <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+            <h3 class="text-center">Confira os dados do seu curso</h3>
+        </div>
+        <div class="card-body" >
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Curso:</b> {{agenda.dataValues.agendaCurso.dataValues.curso.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Local:</b> {{agenda.dataValues.agendaCurso.dataValues.local}}</h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Instrutor:</b>
+                        {{agenda.dataValues.agendaCurso.dataValues.instrutor.dataValues.colaborador.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Gestor:</b> {{agenda.dataValues.agendaCurso.dataValues.gestor.dataValues.colaborador.dataValues.nome}}
+                    </h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data de início:</b>
+                        {{formatDateHorario agenda.dataValues.agendaCurso.dataValues.dataInicio}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data final:</b> {{formatDateHorario agenda.dataValues.agendaCurso.dataValues.dataFinal}}
+                    </h5>
+                </div>
+            </div>
+            <hr>
+            <h4  style="color: #836FFF;" class="text-center mt-3"><b>Avaliação</b></h4>
+            <div class="row mt-4 ">
+                <div class="col-md-3">
+                    <h5><b>Nota: </b> {{agenda.dataValues.avaliacaoCurso.dataValues.nota}}</h5>
+                </div>
+                 <div class="col-md-4">
+                    <h5><b>Presença: </b> {{frequencia.[0].presenca}}%</h5>
+                </div>
+                {{#ifCond agenda.dataValues.avaliacaoCurso.dataValues.situacao "==" 1 }}
+                <div class="col-md-5">
+                       <h5 class="text-primary"><b class='text-dark'> Situação: </b> Aprovado</h5>
+                </div>
+                {{else}}
+                <div class="col-md-5">
+                       <h5 class="text-danger"><b class='text-dark'> Situação: </b> Reprovado</h5>
+                </div>
+                {{/ifCond}}
+            </div>
+            <div class="row mt-3">
+                {{#if agenda.dataValues.avaliacaoCurso.dataValues.observacao}}
+                <div class="col-md-12">
+                    <h5><b>Observação: </b><span style="font-size: 17px; text-align: justify;">{{agenda.dataValues.avaliacaoCurso.dataValues.observacao}}</span></h5>
+                </div>
+                {{else}}
+                <div class="col-md-12">
+                    <h5><b>Observação: </b><span style="font-size: 17px; text-align: justify;">Não há nenhuma observação.</span></h5>
+                </div>
+                {{/if}}
+            </div>
+            <h4  style="color: #836FFF;" class="text-center mt-3"><b>Frequência</b></h4>
+            <div class="card-body mt-3" style="overflow: auto; width: 100%; height: 330px; ">
+                
+
+                {{#each frequencias}}
+                <hr style="color:#836FFF; background-color: #836FFF;">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h6><b>Presença(s): </b>{{presenca}}</h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6><b>Falta(s): </b>{{falta}}</h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h6><b>Hora Aula: </b>{{horaAula}}</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><b>Data Frequência: </b>{{formatDate dataFrequencia}}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mt-12">
+                        {{#if observacao}}
+                        <h6><b>Observação: </b>{{observacao}}</h6>
+                        {{else}}
+                        <h6><b>Observação: </b>Não há observações.</h6>
+                        {{/if}}
+                    </div>
+                </div>
+
+                {{/each}}
+            </div>
+            
+        </div>
+    </div>
+    <div class="mt-4">
+        <a href="/visualizarCursoFinalizado" class="btn btn-primary" style="padding-left:50px; padding-right:50px">Voltar</a>
+    </div>
+    <br/>
+
+</div>

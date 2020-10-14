@@ -1,0 +1,34 @@
+<div class="container mt-4">
+
+    <div class="text-center">
+        <h4>Cursos cadastrados <i class="fa fa-book" aria-hidden="true"></i></h4>
+    </div>
+    {{#if cursos}}
+    <div class="container mt-5">
+    </div>
+    <form action="/buscarCurso" method="post" class="mb-3">
+        <div class="input-group">
+            <input class="form-control" type="text" name="busca" placeholder="nome do curso..." />
+            <div class="input-group-btn">
+                <button class="btn colorViolet text-white" style="background-color:  #836FFF;" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+    {{/if}}
+    {{#each cursos}}
+    <div class="card mt-5">
+        <div class="card-header colorViolet " style="background-color:  #836FFF;">
+            <h5 class="card-title text-white">{{dataValues.nome}}</h5>
+        </div>
+        <div class="card-body">
+            <p><b>Descrição:</b> {{dataValues.descricao}}</p>
+            <p><b>Carga horária:</b> {{dataValues.cargaHoraria}} horas.</p>
+            <p><b>Valor:</b> R${{dataValues.valor}} reais. </p>
+            <a href="/curso/alterar/{{dataValues.id}}" class="btn btn-primary">Alterar</a>
+        </div>
+    </div>
+
+    {{/each}}
+    <a href="/gerenciarCurso" class="btn btn-primary mt-4 mb-4"
+        style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+</div>

@@ -1,0 +1,58 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+    
+    <h3 class="text-center">Sugestões Curso <i class="fa fa-lightbulb-o" aria-hidden="true"></i> </h3>
+    <br/>
+   <div class="container mt-4">
+       <a href="/sugestaoCurso" class="btn btn-success">Sugerir Curso</a>
+   </div>
+
+    {{#each sugestoes}}
+    <div class="card mt-4">
+        
+        <div class="card-header colorViolet text-white">
+            {{nomeCurso}}
+        </div>
+        <div class="card-body">
+            <p><b>Motivo: </b></p>
+            <P class="card-title">{{motivo}}</p>
+            
+            {{#ifCond situacao '==' 0}}
+                <p class="text-danger"><b class="text-dark">Situação: </b>Cancelado.</p>
+            {{/ifCond}}
+            
+            {{#ifCond situacao '==' 1}}
+                <p class="text-primary"><b class="text-dark">Situação: </b>Aceito.</p>
+            {{/ifCond}}
+
+            
+            {{#ifCond situacao '==' 2}}
+                <p class="text-warning"><b class="text-dark">Situação: </b>Em análise.</p>
+            {{/ifCond}}
+           
+            
+        </div>
+    </div>
+
+    {{else}}
+    <div class="card text-center mt-4">
+        <div class="card-header text-white" style="background-color: #836FFF;">
+            <h5>Nenhuma sugestão encontrada.</h5>
+        </div>
+        <div class="card-body">
+            <h6 class="alert alert-primary mt-2">No momento você fez nenhuma sugestão!</h6>
+        </div>
+    </div>
+
+    {{/each}}
+    <br/>
+    <div>
+        <a href="/homeColaborador" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+    <br/>
+</div>

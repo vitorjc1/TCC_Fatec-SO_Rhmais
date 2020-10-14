@@ -1,0 +1,62 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+    
+    {{#if colaboradores}}
+    <div class="container">
+        <h4 class="text-center">Buscar por nome ou matrícula</h4>
+    </div>
+    <form action="/buscarMatricula" method="post" class="mb-3">
+        <div class="input-group">
+            <input class="form-control" type="text" name="matriculaId" placeholder="nome ou matrícula..." />
+            <div class="input-group-btn">
+                <button class="btn colorViolet text-white" type="submit" style="background-color:  #836FFF;">Buscar</button>
+            </div>
+        </div>
+    </form>
+    {{/if}}
+
+    {{#each colaboradores}}
+    <div class="card mt-4">
+
+        <div class="card-header colorViolet text-white" style="background-color:  #836FFF;">
+            <h5>{{dataValues.nome}}</h5>
+        </div>
+        <div class="card-body">
+            <b>Cargo: </b>{{dataValues.cargo.dataValues.nome}}
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <p><b>Matrícula: </b> {{dataValues.matricula}}</p>
+                </div>
+                <div class="col-md-2">
+                    <p><b>Setor: </b>{{dataValues.setor.dataValues.nome}}</p>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+
+            </div>
+
+
+            <a href="/historicoAvaliacoes/{{dataValues.id}}" class="btn btn-primary">Ver mais</a>
+            <a href="/colaborador/alterar/{{dataValues.id}}" class="btn btn-success">Alterar</a>
+            <a class="btn btn-danger" href="/colaboradorExclusao/{{dataValues.id}}">Deletar</a>
+
+        </div>
+
+    </div>
+
+    {{/each}}
+    <br/>
+    <div>
+        <a href="/gerenciarColaborador" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    </div>
+    <br/>
+
+
+    
+
+</div>

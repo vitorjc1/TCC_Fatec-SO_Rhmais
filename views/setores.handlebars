@@ -1,0 +1,14 @@
+
+    <h1 class="text-center mb-4">Setores</h1>
+    <div class="row row-cols-1 row-cols-md-2">
+        {{#each setores}}
+        <div class="col mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">{{dataValues.nome}}</h5>
+                    <button type="button" class="btn btn-primary">Colaboradores</button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>

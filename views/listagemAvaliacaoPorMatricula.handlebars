@@ -1,0 +1,52 @@
+<div class="container mt-4">
+
+    {{#each erros}}
+    <div class="alert alert-danger "> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+    <div class="container">
+        <h4 class="text-center">Buscar por nome ou matrícula</h4>
+    </div>
+    <form action="/buscarColaboradorAvaliacaoPorMatricula" method="post" class="mb-3">
+        <div class="input-group">
+            <input class="form-control" type="text" name="matriculaId" placeholder="nome ou matrícula..." />
+            <div class="input-group-btn">
+                <button class="btn colorViolet text-white" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+    {{#each colaboradores}}
+    <div class="card mt-4">
+
+        <div class="card-header colorViolet text-white">
+            <h5>{{nome}}</h5>
+        </div>
+        <div class="card-body">
+            <p><b>Cargo: </b>{{cargo}}</p>
+            <div class="row mt-2">
+                <div class="col-md-3">
+                    <p><b>Matrícula: </b> {{matricula}}</p>
+                </div>
+                <div class="col-md-3">
+                    <p><b>Setor: </b>{{setor}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>Última Avaliação: </b>{{formatDate dataAvaliacao}}</p>
+                </div>
+            </div>
+
+
+            <a href="/cadastrarAvaliacaoPeriodica/{{id}}" class="btn btn-primary">Avaliar</a>
+        </div>
+    </div>
+    {{/each}}
+    <a href="/gerenciarAvaliacao" class="btn btn-primary mt-4 mb-4"
+        style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+</div>

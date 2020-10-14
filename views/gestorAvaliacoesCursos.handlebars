@@ -1,0 +1,80 @@
+<div class="container mt-4">
+
+    <div class="card mt-5">
+
+        <div class="card-header" style="background-color: #836FFF;">
+            <h4 class="text-center text-white">{{colaborador.dataValues.nome}}</h4>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><b>Matrícula</b>: {{colaborador.dataValues.matricula}}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><b>Cargo:</b> {{colaborador.dataValues.cargo.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><b>Setor:</b> {{colaborador.dataValues.setor.dataValues.nome}}</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h5><b>E-mail</b>: {{colaborador.dataValues.email}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <h3 class="text-center"> Todas Avalições de Cursos <i class="fa fa-book" aria-hidden="true"></i> </h3>
+    <br />
+
+    {{#each avaliacoes}}
+    <div class="card mt-2">
+        <div class="card-header text-white" style="background-color: #836FFF; opacity: 0.85;">
+            <div class="row text-center">
+                <div class="col">
+                    <h4>{{nome}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><b>Nota: </b>{{nota}}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><b>Presença: </b>{{presenca}}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><b>Data: </b>{{formatDate dataAvaliacao}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <h5><b>Observações: </b>{{observacao}}</h5>
+                </div>
+                {{#ifCond situacao "==" "Aprovado"}}
+                <div class="col text-primary">
+                    <h5><b class="text-dark">Situação: </b> Aprovado</h5>
+                </div>
+                {{else}}
+                <div class="col text-danger">
+                    <h5><b class="text-dark">Situação: </b> Reprovado</h5>
+                </div>
+                {{/ifCond}}
+            </div>
+            <div class="row">
+                <div class="col-md-4 mt-3"><a href="/detalheAvaliacaoCurso/{{agendaCursoColaboradorId}}/{{colaboradorId}}/1"
+                        class="btn btn-primary">Ver mais</a></div>
+            </div>
+        </div>
+    </div>    
+    {{/each}}
+    <a href="/historicoAvaliacoes/{{colaborador.dataValues.id}}" class="btn btn-primary mt-4 mb-4"
+            style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+
+
+</div>

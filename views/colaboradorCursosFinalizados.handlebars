@@ -1,0 +1,74 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+
+    <div class="container">
+        <h3 class="mt-2 text-center"> Cursos Finalizados <i class="fa fa-address-book-o"
+                            aria-hidden="true"></i></h3>
+
+        
+        {{#each agendas}}
+        <div class="card mt-5">
+
+            <div class="card-header colorViolet text-white">
+                <h5>Curso: {{dataValues.curso.dataValues.nome}}</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><b>Instrutor responsável:</b>
+                            {{dataValues.instrutor.dataValues.colaborador.dataValues.nome}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><b>Local:</b> {{dataValues.local}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><b>Data de Início:</b> {{formatDateHorario dataValues.dataInicio}} </p>
+
+                    </div>
+                    <div class="col-md-6">
+                        <p><b>Data de Conclusão:</b> {{formatDateHorario dataValues.dataFinal}}</p>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{#ifCond  dataValues.agendaCursoColaboradors.[0].dataValues.avaliacaoCurso.dataValues.situacao '==' 1}}
+                            <p class="text-primary"><b class='text-dark'>Situação:</b> Aprovado. {{dataValues.agendaCursoColaboradors.[0].dataValues.avaliacaoCurso.dataValues.tipoAprovacao.dataValues.nome}}</p>
+                        {{/ifCond}}
+                        {{#ifCond  dataValues.agendaCursoColaboradors.[0].dataValues.avaliacaoCurso.dataValues.situacao '==' 0}}
+                            <p class="text-danger"><b class='text-dark'>Situação:</b> Reprovado. {{dataValues.agendaCursoColaboradors.[0].dataValues.avaliacaoCurso.dataValues.tipoAprovacao.dataValues.nome}}</p>
+                        {{/ifCond}}    
+                       
+                    </div>
+                </div>
+
+
+                <a href="/verDesempenhoCursoFinalizado/{{dataValues.agendaCursoColaboradors.[0].dataValues.id}}" class="btn btn-primary">Ver
+                    Desempenho </a>
+
+
+            </div>
+        </div>
+        {{else}}
+        <div class="card mt-4 text-center">
+            <div class="card-header colorViolet text-white">
+                <h5>Nenhuma agenda encontrada.</h5>
+            </div>
+            <div class="card-Body">
+                <p>No momento você não conclui nenhum curso agendado!</p>
+            </div>
+        </div>
+        {{/each}}
+    <br/>
+    <a href="consultarAgenda" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Voltar</a>
+    
+    </div>
+    <br/>
+</div>

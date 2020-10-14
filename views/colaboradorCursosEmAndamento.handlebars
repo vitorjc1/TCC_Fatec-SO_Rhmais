@@ -1,0 +1,62 @@
+<div class="container mt-4">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">{{dataValues.sucesso}}!</div>
+    {{else}}
+
+    {{/if}}
+    <div class="container">
+        
+        <h3 class="text-center mt-4"> Cursos em Andamento <i class="fa fa-address-book-o"
+                            aria-hidden="true"></i></h3>
+        {{#each agendas}}
+        <div class="card mt-5">
+
+            <div class="card-header colorViolet text-white">
+                <h5>Curso: {{agendaCurso.dataValues.curso.dataValues.nome}}</h5>
+            </div>
+            <div class="card-body">
+                <div class="col">
+                    <p><b>Instrutor responsavel:</b> {{agendaCurso.dataValues.instrutor.dataValues.colaborador.dataValues.nome}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Data de Inicio:</b> {{formatDateHorario agendaCurso.dataValues.dataInicio}} </p>
+                </div>
+                <div class="col">
+                    <p><b>Data de Conclusao:</b> {{formatDateHorario agendaCurso.dataValues.dataFinal}}</p>
+                </div>
+                <div class="col">
+                    <p><b>Local:</b> {{agendaCurso.dataValues.local}}</p>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col"><a href="/verMaisCursoEmAndamento/{{agendaCurso.dataValues.id}}" class="btn btn-primary">Ver mais</a></div>
+                        <div class="col"><a href="/verFrequenciaCursoEmAndamento/{{dataValues.id}}" class="btn btn-primary">Ver frequência</a></div>
+                    </div>
+                    
+                         
+                </div>
+           
+            </div>
+        </div>
+        {{else}}
+        <div class="card mt-4 text-center">
+            <div class="card-header colorViolet text-white">
+                <h5>Nenhuma agenda encontrada.</h5>
+            </div>
+            <div class="card-Body">
+                <div>
+                    <h6 class="alert alert-primary mt-2">No momento você não possui nenhum curso agendado!</h6>
+                </div>
+                
+            </div>
+        </div>
+        {{/each}}
+
+    <div class="mt-4">
+        <a href="/consultarAgenda" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;"> Voltar</a>
+    </div>
+    </div>
+    
+
+</div>

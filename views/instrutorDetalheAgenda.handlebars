@@ -1,0 +1,102 @@
+<div class="container mt-5">
+    {{#each erros}}
+    <div class="alert alert-danger"> {{texto}} </div>
+    <br />
+    {{else}}
+    {{/each}}
+
+    <div class="card mt-4">
+        <div class="card-header colorViolet text-white" style="background-color: #836FFF;">
+            <h3 class="text-center">Participantes da Agenda</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Curso:</b> {{agenda.dataValues.curso.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Local:</b> {{agenda.dataValues.local}}</h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Instrutor:</b>
+                        {{agenda.dataValues.instrutor.dataValues.colaborador.dataValues.nome}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Gestor:</b> {{agenda.dataValues.gestor.dataValues.colaborador.dataValues.nome}}
+                    </h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data de início:</b>
+                        {{formatDateHorario agenda.dataValues.dataInicio}}</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5 class=" "><b>Data final:</b> {{formatDateHorario agenda.dataValues.dataFinal}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h4 style="color: #836FFF;" class="text-center"><b>Histórico de avaliação</b></h4>
+        <div class="card-body " style="overflow: auto; width: 100%; height: 350px; ">
+
+            {{#each avaliacoes}}
+            <hr style="color:#836FFF; background-color: #836FFF;">
+            <div class="row">
+                <div class="col ">
+                   <h5><b>{{nome}}</b></h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-2 ">
+                    <p><b>Nota:</b> {{nota}} </p>
+                </div>
+                <div class="col-md-2 ">
+                    <p><b>Presença:</b> {{porcentagem}}%</p>
+                </div>
+                 <div class="col-md-5">
+                    <p><b>Observação:</b> {{observacao}}</p>
+                </div>
+                <div class="col-md-3 ">
+                    {{#ifCond situacao '==' 'Aprovado'}}
+                    <p><b>Situação:</b> <span class="text-primary">{{situacao}} <b>Aprovado</b></span></p>
+                    {{else}}
+                    <p><b>Situação:</b> <span class="text-danger">{{situacao}} <b>Reprovado</b></span></p>
+                    {{/ifCond}}
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="/alterarAvaliacao/{{agendaCursoColaboradorId}}" class="btn btn-primary" style="padding-left:20px; padding-right:20px;">Alterar avaliação</a>
+                </div>
+            </div>
+
+            {{else}}
+            <div class="card mt-4 text-center ">
+                <div class="card-header  text-white" style="background-color: #836FFF;">
+                    <h3>Nenhum Colaborador inscrito.</h3>
+                </div>
+                <div class="card-Body">
+                    <h6>Está agenda passou do prazo de conclusão e não houve participantes.
+                    </h6>
+                </div>
+            </div>
+
+            {{/each}}
+   
+        </div>
+     <hr style="color:#836FFF; background-color: #836FFF;">
+
+      <div>
+          <a href="/historicoAvaliacaoCurso" class="btn btn-outline-primary mt-4"><b>Voltar</b></a>
+      </div>  
+    </div>
+    <br/>
+    <br/>
+    <br/>
+</div>
